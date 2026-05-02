@@ -1,19 +1,21 @@
 #!/bin/sh
 
-# Script to automate Whonix Desktop (Xfce) installation on KVM
+# Script to automate Whonix Desktop (LXQt) installation on KVM
 # Target: Debian-based systems (Debian/Ubuntu)
 # Author: Me plus AI based on Whonix official documentation
-# Date: May 16, 2025
+# Date: 5/2/2026
+
+
 
 # Configuration variables
-WHONIX_VERSION="17.3.9.9"
-DOWNLOAD_URL="https://www.whonix.org/download/libvirt/${WHONIX_VERSION}/Whonix-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz"
+WHONIX_VERSION="18.1.6.4"
+DOWNLOAD_URL="https://www.whonix.org/download/libvirt/${WHONIX_VERSION}/Whonix-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz"
 SIGNATURE_URL="${DOWNLOAD_URL}.asc"
 WORKING_DIR="$HOME/whonix-install"
 LIBVIRT_IMG_DIR="/var/lib/libvirt/images"
 GPG_KEY_URL="https://www.whonix.org/keys/derivative.asc"
-SIGNATURE_FILE="$HOME/whonix-install/Whonix-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz.asc"
-IMAGE_FILE="$HOME/whonix-install/Whonix-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz"
+SIGNATURE_FILE="$HOME/whonix-install/Whonix-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz.asc"
+IMAGE_FILE="$HOME/whonix-install/Whonix-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz"
 
 # Ensure script is run with sudo privileges
 if [ "$(id -u)" -eq 0 ]; then
@@ -111,12 +113,12 @@ verify_image
 
 # Step 6: Extract the image
 echo "Extracting Whonix image..."
-tar -xvf "Whonix-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz" || error_exit "Failed to extract image"
+tar -xvf "Whonix-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2.libvirt.xz" || error_exit "Failed to extract image"
 
 # Step 7: Move image files to libvirt directory
 echo "Moving image files to $LIBVIRT_IMG_DIR..."
-sudo mv "Whonix-Gateway-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2" "${LIBVIRT_IMG_DIR}/Whonix-Gateway.qcow2" || error_exit "Failed to move Gateway image"
-sudo mv "Whonix-Workstation-Xfce-${WHONIX_VERSION}.Intel_AMD64.qcow2" "${LIBVIRT_IMG_DIR}/Whonix-Workstation.qcow2" || error_exit "Failed to move Workstation image"
+sudo mv "Whonix-Gateway-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2" "${LIBVIRT_IMG_DIR}/Whonix-Gateway.qcow2" || error_exit "Failed to move Gateway image"
+sudo mv "Whonix-Workstation-LXQt-${WHONIX_VERSION}.Intel_AMD64.qcow2" "${LIBVIRT_IMG_DIR}/Whonix-Workstation.qcow2" || error_exit "Failed to move Workstation image"
 
 # Step 8: Define virtual networks
 echo "Defining Whonix virtual networks..."
